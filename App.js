@@ -1,80 +1,55 @@
 import React, { Component } from 'react';
-import { AppRegistry, ScrollView, Image, Text } from 'react-native';
+import { ActivityIndicator, ListView, Text, View } from 'react-native';
 
-export default class App extends Component {
+export default class Movies extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  componentDidMount() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+      console.log("Hi")
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({
+          isLoading: false,
+          dataSource: ds.cloneWithRows(responseJson.movies),
+        }, function() {
+          // do something with new state
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
+    if (this.state.isLoading) {
       return (
-        <ScrollView>
-          <Text style={{fontSize:96}}>Scroll me plz</Text>
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Text style={{fontSize:96}}>If you like</Text>
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Text style={{fontSize:96}}>Scrolling down</Text>
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Text style={{fontSize:96}}>What's the best</Text>
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Text style={{fontSize:96}}>Framework around?</Text>
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Image style={{width: 50, height: 50}}  source={require('./img/logo-react-native.png')} />
-          <Text style={{fontSize:80}}>React Native</Text>
-        </ScrollView>
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
+    return (
+
+
+
+
+
+
+      <View style={{flex: 1, paddingTop: 20}}>
+
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
+        />
+      </View>
     );
   }
 }
-
-
-//export default class App extends Component<{}> {
-//  render() {
-//    return (
-//      <View style={styles.container}>
-//        <Text style={styles.welcome}>
-//          Welcome to React Native!
-//        </Text>
-//        <Text style={styles.instructions}>
-//          To get started, edit App.js
-//        </Text>
-//        <Text style={styles.instructions}>
-//          {instructions}
-//        </Text>
-//      </View>
-//    );
-//  }
-//}
-//
-//const styles = StyleSheet.create({
-//  container: {
-//    flex: 1,
-//    justifyContent: 'center',
-//    alignItems: 'center',
-//    backgroundColor: '#F5FCFF',
-//  },
-//  welcome: {
-//    fontSize: 20,
-//    textAlign: 'center',
-//    margin: 10,
-//  },
-//  instructions: {
-//    textAlign: 'center',
-//    color: '#333333',
-//    marginBottom: 5,
-//  },
-//});
