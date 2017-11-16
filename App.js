@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View } from 'react-native';
+import { ActivityIndicator, ListView, Text, View ,ToolbarAndroid,StyleSheet,ScrollView, Image} from 'react-native';
 
 export default class Movies extends Component {
   constructor(props) {
@@ -37,19 +37,71 @@ export default class Movies extends Component {
     }
 
     return (
+      <View style={styles.containerToolbar}>
+       <ToolbarAndroid style={styles.toolbar}
+                       title="Culminated"
+                       //navIcon={require('image!ic_arrow_back_white_24dp')}
+                       logo={require('./img/logo-react-native.png')}
+                       //titleColor={'#FFFFFF'}/>
+                       titleColor={'#000000'}/>
 
-
-
-
-
-
-      <View style={{flex: 1, paddingTop: 20}}>
-
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
-        />
+         <ScrollView>
+                  <Text style={{fontSize:96}}>Scroll me plz</Text>
+                  <ListView
+                            dataSource={this.state.dataSource}
+                            renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
+                          />
+                  <Text style={{fontSize:96}}>If you like</Text>
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Text style={{fontSize:96}}>Scrolling down</Text>
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Text style={{fontSize:96}}>What's the best</Text>
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Text style={{fontSize:96}}>Framework around?</Text>
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image source={require('./img/logo-react-native.png')} />
+                  <Text style={{fontSize:80}}>React Native</Text>
+                </ScrollView>
+        
+        
+        
       </View>
     );
   }
 }
+
+
+
+const styles = StyleSheet.create({
+  containerToolbar: {
+    flex: 1,
+    //justifyContent: 'center',
+    justifyContent: 'flex-start',
+    // https://github.com/facebook/react-native/issues/2957#event-417214498
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF',
+  },
+  toolbar: {
+    backgroundColor: '#e9eaed',
+    height: 56,
+    alignItems:'baseline',
+    textAlign: 'center',
+  },
+
+});
+
