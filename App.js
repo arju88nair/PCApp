@@ -38,12 +38,13 @@ export default class Movies extends Component {
 
     return (
       <View style={styles.containerToolbar}>
-       <ToolbarAndroid style={styles.toolbar}
-                       title="Culminated"
-                       //navIcon={require('image!ic_arrow_back_white_24dp')}
-                       logo={require('./img/logo-react-native.png')}
-                       //titleColor={'#FFFFFF'}/>
-                       titleColor={'#000000'}/>
+
+                <ToolbarAndroid style={styles.toolbar}
+                                logo={require('./img/logo-react-native.png')}
+                                onIconClicked={navigator.pop}
+                                titleColor={'#000000'}/>
+
+
 
          <ScrollView>
                   <Text style={{fontSize:96}}>Scroll me plz</Text>
@@ -52,7 +53,7 @@ export default class Movies extends Component {
                             renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
                           />
                   <Text style={{fontSize:96}}>If you like</Text>
-                  <Image source={require('./img/logo-react-native.png')} />
+                  <Image  source={require('./img/logo-react-native.png')} />
                   <Image source={require('./img/logo-react-native.png')} />
                   <Image source={require('./img/logo-react-native.png')} />
                   <Image source={require('./img/logo-react-native.png')} />
@@ -77,9 +78,9 @@ export default class Movies extends Component {
                   <Image source={require('./img/logo-react-native.png')} />
                   <Text style={{fontSize:80}}>React Native</Text>
                 </ScrollView>
-        
-        
-        
+
+
+
       </View>
     );
   }
@@ -101,7 +102,13 @@ const styles = StyleSheet.create({
     height: 56,
     alignItems:'baseline',
     textAlign: 'center',
+    borderColor:"#000000"
   },
+  logo:
+  {
+  backgroundColor: "#e9eaed",
+  opacity:0.5
+  }
 
 });
 
