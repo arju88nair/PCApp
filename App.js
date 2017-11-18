@@ -10,14 +10,14 @@ export default class Movies extends Component {
   }
 
   componentDidMount() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
+    return fetch('http://192.168.2.5:8000/api/main')
       .then((response) => response.json())
       .then((responseJson) => {
       console.log("Hi")
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({
           isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson.movies),
+          dataSource: ds.cloneWithRows(responseJson),
         }, function() {
           // do something with new state
         });
@@ -40,9 +40,10 @@ export default class Movies extends Component {
       <View style={styles.containerToolbar}>
 
                 <ToolbarAndroid style={styles.toolbar}
-                                logo={require('./img/logo-react-native.png')}
+                                logo={require('./img/mipmap-hdpi/ic_launcher.png')}
                                 onIconClicked={navigator.pop}
-                                titleColor={'#000000'}/>
+                                title=""
+                                titleColor={'#ffffff'}/>
 
 
 
@@ -50,7 +51,7 @@ export default class Movies extends Component {
                   <Text style={{fontSize:96}}>Scroll me plz</Text>
                   <ListView
                             dataSource={this.state.dataSource}
-                            renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
+                            renderRow={(rowData) => <Text>{rowData.title}, {rowData.source}</Text>}
                           />
                   <Text style={{fontSize:96}}>If you like</Text>
                   <Image  source={require('./img/logo-react-native.png')} />
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   toolbar: {
-    backgroundColor: '#e9eaed',
+    backgroundColor: '#000000',
     height: 56,
     alignItems:'baseline',
     textAlign: 'center',
