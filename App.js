@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, ListView, Text, View ,ToolbarAndroid,StyleSheet,ScrollView, Image} from 'react-native';
-
+import Row from './Components/Row'
 export default class Movies extends Component {
   constructor(props) {
     super(props);
@@ -47,38 +47,13 @@ export default class Movies extends Component {
 
 
 
-         <ScrollView>
-                  <Text style={{fontSize:96}}>Scroll me plz</Text>
-                  <ListView
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) => <Text>{rowData.title}, {rowData.source}</Text>}
-                          />
-                  <Text style={{fontSize:96}}>If you like</Text>
-                  <Image  source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Text style={{fontSize:96}}>Scrolling down</Text>
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Text style={{fontSize:96}}>What's the best</Text>
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Text style={{fontSize:96}}>Framework around?</Text>
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Image source={require('./img/logo-react-native.png')} />
-                  <Text style={{fontSize:80}}>React Native</Text>
-                </ScrollView>
+        <ListView
+               style={styles.container}
+               dataSource={this.state.dataSource}
+               renderRow={(data) => <Row {...data} />}
+               renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+
+             />
 
 
 
@@ -109,7 +84,17 @@ const styles = StyleSheet.create({
   {
   backgroundColor: "#e9eaed",
   opacity:0.5
-  }
+  },
+
+  container: {
+    flex: 1,
+    marginTop: 20,
+  },
+  separator: {
+        flex: 1,
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: '#8E8E8E',
+      },
 
 });
 
