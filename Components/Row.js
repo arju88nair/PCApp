@@ -28,7 +28,7 @@ const Row = (props) => (
                                                                              });
                                                                          }} />
     <Text style={styles.text}>
-      {`${props.title} ${props.title}`}
+      {` ${props.title}`}
     </Text>
   </View>
 );

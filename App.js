@@ -1,33 +1,93 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View ,ToolbarAndroid,StyleSheet,ScrollView, Image} from 'react-native';
+import { ActivityIndicator, AppRegistry, StyleSheet, FlatList, Text, View, Alert} from 'react-native';
 import Row from './Components/Row'
-export default class Movies extends Component {
-  constructor(props) {
+export default class App extends Component {
+
+  constructor(props)
+  {
     super(props);
-    this.state = {
-      isLoading: true
-    }
+
+    this.state = { FlatListItems: [
+      {key: 'Next stop $10,000? Bitcoin\'s incredible surge'},
+      {key: 'The CNN news quiz: What do you remember from the week that was?'},
+      {key: 'Three'},
+      {key: 'Four'},
+      {key: 'Five'},
+      {key: 'Six'},
+      {key: 'Seven'},
+      {key: 'Eight'},
+      {key: 'Nine'},
+      {key: 'Ten'},
+      {key: 'Eleven'},
+      {key: 'Twelve'}
+    ]}
   }
 
-  componentDidMount() {
-    return fetch('http://192.168.2.5:8000/api/main')
-      .then((response) => response.json())
-      .then((responseJson) => {
-      console.log("Hi")
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson),
-        }, function() {
-          // do something with new state
+
+    componentDidMount() {
+      return fetch('http://52.14.113.12/api/main')
+        .then((response) => response.json())
+        .then((responseJson) => {
+        console.log("Hi")
+          let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+          this.setState({
+            isLoading: false,
+            dataSource: ds.cloneWithRows(responseJson),
+          }, function() {
+            // do something with new state
+          });
+        })
+        .catch((error) => {
+          console.error(error);
         });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }
+
+
+
+
+
+
+
+FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#607D8B",
+        }}
+      />
+    );
   }
 
-  render() {
+  GetItem (item) {
+
+  Alert.alert(item);
+
+  }
+
+
+//  render() {
+//    return (
+//
+//<View style={styles.MainContainer}>
+//
+//       <FlatList
+//
+//          data={ this.state.FlatListItems }
+//
+//          ItemSeparatorComponent = {this.FlatListItemSeparator}
+//
+//          renderItem={({item}) => <Text style={styles.item} onPress={this.GetItem.bind(this, item.key)} > {item.key} </Text>}
+//         />
+//
+//
+//</View>
+//
+//    );
+//  }
+
+ render() {
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -60,41 +120,26 @@ export default class Movies extends Component {
       </View>
     );
   }
+
+
+
 }
 
-
-
 const styles = StyleSheet.create({
-  containerToolbar: {
-    flex: 1,
-    //justifyContent: 'center',
-    justifyContent: 'flex-start',
-    // https://github.com/facebook/react-native/issues/2957#event-417214498
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-  },
-  toolbar: {
-    backgroundColor: '#000000',
-    height: 56,
-    alignItems:'baseline',
-    textAlign: 'center',
-    borderColor:"#000000"
-  },
-  logo:
-  {
-  backgroundColor: "#e9eaed",
-  opacity:0.5
-  },
 
-  container: {
-    flex: 1,
-    marginTop: 20,
+MainContainer :{
+
+// Setting up View inside content in Vertically center.
+justifyContent: 'center',
+flex:1,
+margin: 10
+
+},
+
+item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
   },
-  separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-      },
 
 });
-
