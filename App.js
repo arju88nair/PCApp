@@ -67,62 +67,25 @@ FlatListItemSeparator = () => {
   }
 
 
-//  render() {
-//    return (
-//
-//<View style={styles.MainContainer}>
-//
-//       <FlatList
-//
-//          data={ this.state.FlatListItems }
-//
-//          ItemSeparatorComponent = {this.FlatListItemSeparator}
-//
-//          renderItem={({item}) => <Text style={styles.item} onPress={this.GetItem.bind(this, item.key)} > {item.key} </Text>}
-//         />
-//
-//
-//</View>
-//
-//    );
-//  }
-
- render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{flex: 1, paddingTop: 20}}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
-
+  render() {
     return (
-      <View style={styles.containerToolbar}>
 
-                <ToolbarAndroid style={styles.toolbar}
-                                logo={require('./img/mipmap-hdpi/ic_launcher.png')}
-                                onIconClicked={navigator.pop}
-                                title=""
-                                titleColor={'#ffffff'}/>
+<View style={styles.MainContainer}>
 
+       <FlatList
 
+          data={ this.state.FlatListItems }
 
-        <ListView
-               style={styles.container}
-               dataSource={this.state.dataSource}
-               renderRow={(data) => <Row {...data} />}
-               renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+          ItemSeparatorComponent = {this.FlatListItemSeparator}
 
-             />
+          renderItem={({item}) => <Text style={styles.item} onPress={this.GetItem.bind(this, item.key)} > {item.key} </Text>}
+         />
 
 
+</View>
 
-      </View>
     );
   }
-
-
-
 }
 
 const styles = StyleSheet.create({
