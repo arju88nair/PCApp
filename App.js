@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AppRegistry, StyleSheet, FlatList, Text, View, Alert} from 'react-native';
+import { ActivityIndicator, ToolbarAndroid, Image,AppRegistry, StyleSheet, FlatList, Text, View, Alert} from 'react-native';
 import Row from './Components/Row'
-export default class App extends Component {
+export default class Movies extends Component {
 
-  constructor(props)
-  {
+
+constructor(props) {
     super(props);
-
-    this.state = { FlatListItems: [
-      {key: 'Next stop $10,000? Bitcoin\'s incredible surge'},
-      {key: 'The CNN news quiz: What do you remember from the week that was?'},
-      {key: 'Three'},
-      {key: 'Four'},
-      {key: 'Five'},
-      {key: 'Six'},
-      {key: 'Seven'},
-      {key: 'Eight'},
-      {key: 'Nine'},
-      {key: 'Ten'},
-      {key: 'Eleven'},
-      {key: 'Twelve'}
-    ]}
+    this.state = {
+      isLoading: true
+    }
   }
 
 
-    componentDidMount() {
+
+  componentDidMount() {
       return fetch('http://52.14.113.12/api/main')
         .then((response) => response.json())
         .then((responseJson) => {
-        console.log("Hi")
-          let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+                  console.warn(responseJson)
+
+          // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
           this.setState({
             isLoading: false,
-            dataSource: ds.cloneWithRows(responseJson),
+            dataSource: responseJson
           }, function() {
             // do something with new state
           });
@@ -43,10 +33,11 @@ export default class App extends Component {
     }
 
 
+ GetItem (item) {
 
+  Alert.alert(item);
 
-
-
+  }
 
 FlatListItemSeparator = () => {
     return (
@@ -60,6 +51,7 @@ FlatListItemSeparator = () => {
     );
   }
 
+
   GetItem (item) {
 
   Alert.alert(item);
@@ -67,27 +59,10 @@ FlatListItemSeparator = () => {
   }
 
 
-//  render() {
-//    return (
-//
-//<View style={styles.MainContainer}>
-//
-//       <FlatList
-//
-//          data={ this.state.FlatListItems }
-//
-//          ItemSeparatorComponent = {this.FlatListItemSeparator}
-//
-//          renderItem={({item}) => <Text style={styles.item} onPress={this.GetItem.bind(this, item.key)} > {item.key} </Text>}
-//         />
-//
-//
-//</View>
-//
-//    );
-//  }
 
- render() {
+
+
+render() {
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -105,21 +80,28 @@ FlatListItemSeparator = () => {
                                 title=""
                                 titleColor={'#ffffff'}/>
 
+        <FlatList
+
+                  data={ this.state.dataSource }
+
+                  ItemSeparatorComponent = {this.FlatListItemSeparator}
+
+                  renderItem={(data) => <Row {...data} />}
+                 />
 
 
-        <ListView
-               style={styles.container}
-               dataSource={this.state.dataSource}
-               renderRow={(data) => <Row {...data} />}
-               renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-
-             />
 
 
 
       </View>
     );
   }
+
+
+
+
+
+
 
 
 
@@ -135,7 +117,31 @@ flex:1,
 margin: 10
 
 },
+  containerToolbar: {
+    flex: 1,
+    //justifyContent: 'center',
+    justifyContent: 'flex-start',
+    // https://github.com/facebook/react-native/issues/2957#event-417214498
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF',
+  },
+  toolbar: {
+    backgroundColor: '#000000',
+    height: 56,
+    alignItems:'baseline',
+    textAlign: 'center',
+    borderColor:"#000000"
+  },
+  logo:
+  {
+  backgroundColor: "#e9eaed",
+  opacity:0.5
+  },
 
+  container: {
+    flex: 1,
+    marginTop: 20,
+  },
 item: {
     padding: 10,
     fontSize: 18,
@@ -143,3 +149,4 @@ item: {
   },
 
 });
+

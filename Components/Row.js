@@ -20,14 +20,18 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+
 const Row = (props) => (
+
   <View style={styles.container}>
-    <Image source={{ uri: props.image}} style={styles.photo} onError={(a) => {
-                                                                             this.setState({
-                                                                                 image: require('../img/mipmap-hdpi/ic_launcher.png')
+
+    <Image source={{ uri: props.image}} style={styles.photo}
+     onError={(a) => {this.setState({image: require('../img/mipmap-hdpi/ic_launcher.png')
                                                                              });
                                                                          }} />
-    <Text style={styles.text}>
+    <Text style={styles.item}  >
       {` ${props.title}`}
     </Text>
   </View>
